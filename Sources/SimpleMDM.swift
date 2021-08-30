@@ -33,7 +33,7 @@ public class SimpleMDM {
             case .apps():                               return (.get,   "/api/v1/apps", nil)
             case .app(let appId):                       return (.get,   "/api/v1/apps/\(appId)", nil)
             case .updateAppGroupApps(let appGroupId):   return (.post,  "/api/v1/app_groups/\(appGroupId)/update_apps", nil)
-            case .devices():                            return (.get,   "/api/v1/devices\?limit=100", nil)
+            case .devices():                            return (.get,   "/api/v1/devices?limit=100", nil)
             case .installedApps(let deviceId):          return (.get,   "/api/v1/devices/\(deviceId)/installed_apps", nil)
             case .pushApps(let deviceId):               return (.post,  "/api/v1/devices/\(deviceId)/push_apps", nil)
             case .refresh(let deviceId):                return (.post,  "/api/v1/devices/\(deviceId)/refresh", nil)
