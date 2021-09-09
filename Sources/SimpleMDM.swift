@@ -40,7 +40,7 @@ public class SimpleMDM {
             case .refresh(let deviceId):                return (.post,  "/api/v1/devices/\(deviceId)/refresh", nil)
             case .deviceGroups():                       return (.get,   "/api/v1/device_groups", nil)
             case .managedAppConfigs(let appId):         return (.get,   "/api/v1/apps/\(appId)/managed_configs", nil)
-            case .customAttribute()                     return (.get,   "/api/v1/devices/\(deviceId)/custom_attribute_values", nil)
+            case .customAttribute(let deviceId):        return (.get,   "/api/v1/devices/\(deviceId)/custom_attribute_values", nil)
             }
         }
 
