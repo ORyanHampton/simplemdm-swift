@@ -24,6 +24,7 @@ public class SimpleMDM {
         case refresh(deviceId: Int)
         case deviceGroups()
         case managedAppConfigs(appId: Int)
+        case customAttribute(deviceId: Int)
 
         /// Routes
         var route: (method: Alamofire.HTTPMethod, path: String, parameters: [String: Any]?) {
@@ -39,6 +40,7 @@ public class SimpleMDM {
             case .refresh(let deviceId):                return (.post,  "/api/v1/devices/\(deviceId)/refresh", nil)
             case .deviceGroups():                       return (.get,   "/api/v1/device_groups", nil)
             case .managedAppConfigs(let appId):         return (.get,   "/api/v1/apps/\(appId)/managed_configs", nil)
+            case .customAttribute()                     return (.get,   "/api/v1/devices/\(deviceId)/custom_attribute_values", nil)
             }
         }
 
@@ -150,7 +152,18 @@ public class SimpleMDM {
                 completion(json?.arrayValue ?? JSON([]).arrayValue)
             }
         }
-
+        
+        /**
+        ### List device custom attributes
+        
+        returns list of custom attributes on devices
+        */
+        public static func customAttribute(forDeviceWithId deviceId: Int, completion: @escaping ([JSON]) -> ()) {
+            Router.customAttribute(deviceId: deviceId).fetch { (json, error) in
+                completion(json?.arrayValue ?? JSON([]).arrayValue)
+            }
+        }
+        
         /**
          ### Push assigned apps
 
